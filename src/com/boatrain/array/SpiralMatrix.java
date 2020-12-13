@@ -33,40 +33,49 @@ public class SpiralMatrix {
                 result.add(matrix[i][j]);
                 visited[i][j] = true;
             } else if (isInArea(i, j + 1) && !visited[i][j + 1]) {
+                //右边
                 result.add(matrix[i][j + 1]);
                 j++;
                 visited[i][j] = true;
-            } else if (isInArea(i, j - 1) && !visited[i][j - 1]) {
-                result.add(matrix[i][j - 1]);
-                j--;
-                visited[i][j] = true;
-            } else if (isInArea(i + 1, j) && !visited[i + 1][j]) {
-                result.add(matrix[i + 1][j]);
-                i++;
-                visited[i][j] = true;
-            } else if (isInArea(i - 1, j) && !visited[i - 1][j]) {
-                result.add(matrix[i - 1][j]);
-                i--;
-                visited[i][j] = true;
-            } else {
+            }
+            //左、下、上的判断可以去掉，因为向上的while结束后，下一步就是向右了
+//            else if (isInArea(i, j - 1) && !visited[i][j - 1]) {
+//                result.add(matrix[i][j - 1]);
+//                j--;
+//                visited[i][j] = true;
+//            } else if (isInArea(i + 1, j) && !visited[i + 1][j]) {
+//                result.add(matrix[i + 1][j]);
+//                i++;
+//                visited[i][j] = true;
+//            } else if (isInArea(i - 1, j) && !visited[i - 1][j]) {
+//                result.add(matrix[i - 1][j]);
+//                i--;
+//                visited[i][j] = true;
+//            }
+            else {
+                //上下左右都遍历过了，结束循环
                 break;
             }
             while (isInArea(i, j + 1) && !visited[i][j + 1]) {
+                //向右
                 result.add(matrix[i][j + 1]);
                 j++;
                 visited[i][j] = true;
             }
             while (isInArea(i + 1, j) && !visited[i + 1][j]) {
+                //向下
                 result.add(matrix[i + 1][j]);
                 i++;
                 visited[i][j] = true;
             }
             while (isInArea(i, j - 1) && !visited[i][j - 1]) {
+                //向左
                 result.add(matrix[i][j - 1]);
                 j--;
                 visited[i][j] = true;
             }
             while (isInArea(i - 1, j) && !visited[i - 1][j]) {
+                //向上
                 result.add(matrix[i - 1][j]);
                 i--;
                 visited[i][j] = true;
