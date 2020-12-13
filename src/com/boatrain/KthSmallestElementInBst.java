@@ -1,6 +1,6 @@
 package com.boatrain;
 
-import com.lsz.leetcode.tree.TreeNode;
+import com.boatrain.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
