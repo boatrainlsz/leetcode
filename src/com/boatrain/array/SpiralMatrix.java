@@ -7,7 +7,6 @@ import java.util.List;
  * https://leetcode-cn.com/problems/spiral-matrix/
  */
 public class SpiralMatrix {
-    private int[][] directions = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
     private int maxX;
     private int maxY;
 
