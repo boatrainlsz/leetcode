@@ -16,17 +16,19 @@ class WordPattern {
         int length = pattern.length();
         if (pattern.length() != split.length) return false;
         for (int i = 0; i < length; i++) {
-            if (map1.get(pattern.charAt(i)) == null) {
-                map1.put(pattern.charAt(i), split[i]);
+            String str = split[i];
+            char c = pattern.charAt(i);
+            if (map1.get(c) == null) {
+                map1.put(c, str);
             } else {
-                if (!map1.get(pattern.charAt(i)).equals(split[i])) {
+                if (!map1.get(c).equals(str)) {
                     return false;
                 }
             }
-            if (map2.get(split[i]) == null) {
-                map2.put(split[i], pattern.charAt(i));
+            if (map2.get(str) == null) {
+                map2.put(str, c);
             } else {
-                if (!map2.get(split[i]).equals(pattern.charAt(i))) {
+                if (!map2.get(str).equals(c)) {
                     return false;
                 }
             }
