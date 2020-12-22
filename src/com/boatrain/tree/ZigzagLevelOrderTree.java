@@ -1,9 +1,6 @@
 package com.boatrain.tree;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
@@ -22,8 +19,8 @@ public class ZigzagLevelOrderTree {
         queue.add(root);//先把节点加入到队列中
         boolean leftToRight = true;//第一步先从左边开始打印
         while (!queue.isEmpty()) {
-            //记录每层节点的值
-            List<Integer> levelList = new LinkedList<>();
+            //双端队列
+            Deque<Integer> levelList = new LinkedList<>();
             //统计这一层有多少个节点
             int count = queue.size();
             //遍历这一层的所有节点，把他们全部从队列中移出来，顺便
@@ -35,11 +32,10 @@ public class ZigzagLevelOrderTree {
                 //判断是从左往右打印还是从右往左打印。
                 if (leftToRight) {
                     //如果从左边打印，直接把访问的节点值加入到列表level的末尾即可
-                    levelList.add(node.val);
+                    levelList.addLast(node.val);
                 } else {
-                    //如果是从右边开始打印，每次要把访问的节点值
-                    //加入到列表的最前面
-                    levelList.add(0, node.val);
+                    //如果是从右边开始打印，每次要把访问的节点值加入到列表的最前面
+                    levelList.addFirst(node.val);
                 }
                 //左右子节点如果不为空会被加入到队列中
                 if (node.left != null)
@@ -48,7 +44,7 @@ public class ZigzagLevelOrderTree {
                     queue.add(node.right);
             }
             //把这一层的节点值加入到集合res中
-            res.add(levelList);
+            res.add(new ArrayList<>(levelList));
             //改变下次访问的方向
             leftToRight = !leftToRight;
         }
