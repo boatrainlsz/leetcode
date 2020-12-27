@@ -2,6 +2,9 @@ package com.boatrain.string;
 
 import java.util.HashMap;
 
+/**
+ * https://leetcode-cn.com/problems/isomorphic-strings/
+ */
 public class IsomorphicStrings {
     public static void main(String[] args) {
         IsomorphicStrings solution = new IsomorphicStrings();
