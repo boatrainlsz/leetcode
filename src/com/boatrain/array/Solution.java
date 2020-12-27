@@ -1,30 +1,53 @@
 package com.boatrain.array;
 
-class Solution {
+import java.util.Arrays;
+
+public class Solution {
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(solution.numberOfMatches(14));
+        Solution soluton = new Solution();
+        int[][] grid = new int[][]{{1, 1, 1, -1, -1}, {1, 1, 1, -1, -1}, {-1, -1, -1, 1, 1}, {1, 1, 1, 1, -1}, {-1, -1, -1, -1, -1}};
+        System.out.println(Arrays.toString(soluton.findBall(grid)));
     }
 
-    public int numberOfMatches(int n) {
-        int result = 0;
-        int cur = n;
-        while (true) {
-            int match = 0;
-            if (cur % 2 == 0) {
-                //偶数
-                cur /= 2;
-                match += cur;
-            } else {
-                //jishu
-                cur = (cur - 1) / 2 + 1;
-                match += cur - 1;
-            }
-            result += match;
-            if (match == 1) {
-                break;
+    public int[] findBall(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+        int[] ans = new int[col];
+        for (int i = 0; i < col; i++) {
+            int curCol = i;
+            for (int j = 0; j < row; ) {
+                if (j == 0) {
+                    if (grid[j][i] == 1 && (i == col - 1 || grid[j][i + 1] == -1)) {
+                        ans[i] = -1;
+                        break;
+                    } else if (grid[j][i] == -1 && (i == 0 || grid[j][i - 1] == 1)) {
+                        ans[i] = -1;
+                        break;
+                    } else {
+                        ans[i] = i;
+                    }
+                }
+                if (grid[j][i] == 1) {
+                    if (curCol != col - 1 && grid[j][curCol + 1] != -1) {
+                        ans[i] += 1;
+                        curCol++;
+                        j++;
+                    } else {
+                        ans[i] = -1;
+                        break;
+                    }
+                } else if (grid[j][curCol] == -1) {
+                    if (curCol != 0 && grid[j][curCol - 1] != 1) {
+                        ans[i] -= 1;
+                        curCol--;
+                        j++;
+                    } else {
+                        ans[i] = -1;
+                        break;
+                    }
+                }
             }
         }
-        return result;
+        return ans;
     }
 }
