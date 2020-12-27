@@ -14,19 +14,20 @@ public class Solution {
         int col = grid[0].length;
         int[] ans = new int[col];
         for (int i = 0; i < col; i++) {
+            if (grid[0][i] == 1 && (i == col - 1 || grid[0][i + 1] == -1)) {
+                ans[i] = -1;
+            } else if (grid[0][i] == -1 && (i == 0 || grid[0][i - 1] == 1)) {
+                ans[i] = -1;
+            } else {
+                ans[i] = i;
+            }
+        }
+        for (int i = 0; i < col; i++) {
+            if (ans[i] == -1) {
+                continue;
+            }
             int curCol = i;
             for (int j = 0; j < row; ) {
-                if (j == 0) {
-                    if (grid[j][i] == 1 && (i == col - 1 || grid[j][i + 1] == -1)) {
-                        ans[i] = -1;
-                        break;
-                    } else if (grid[j][i] == -1 && (i == 0 || grid[j][i - 1] == 1)) {
-                        ans[i] = -1;
-                        break;
-                    } else {
-                        ans[i] = i;
-                    }
-                }
                 if (grid[j][i] == 1) {
                     if (curCol != col - 1 && grid[j][curCol + 1] != -1) {
                         ans[i] += 1;
