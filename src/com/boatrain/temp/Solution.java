@@ -1,17 +1,11 @@
-package com.boatrain.dynamicprogramming;
+package com.boatrain.temp;
 
-import java.util.Arrays;
-
-/**
- * https://leetcode-cn.com/problems/longest-increasing-subsequence/
- */
-public class LongestIncreasingSubsequence {
+class Solution {
     public static void main(String[] args) {
-        LongestIncreasingSubsequence sulotion = new LongestIncreasingSubsequence();
-//        int[] nums = new int[]{1, 3, 6, 7, 9, 4, 10, 5, 6};
-//        int[] nums = new int[]{1, 2, 3};
-        int[] nums = new int[]{10, 9, 2, 5, 3, 7, 101, 18};
-        System.out.println(sulotion.lengthOfLIS(nums));
+        Solution solution = new Solution();
+        int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+//        int[] nums = {0, 1, 0, 3, 2, 3};
+        System.out.println(solution.lengthOfLIS(nums));
     }
 
     public int lengthOfLIS(int[] nums) {
