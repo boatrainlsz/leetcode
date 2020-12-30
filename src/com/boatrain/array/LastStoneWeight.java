@@ -2,6 +2,9 @@ package com.boatrain.array;
 
 import java.util.PriorityQueue;
 
+/**
+ * https://leetcode-cn.com/problems/last-stone-weight/
+ */
 public class LastStoneWeight {
     public static void main(String[] args) {
         LastStoneWeight solution = new LastStoneWeight();
