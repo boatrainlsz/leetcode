@@ -16,34 +16,30 @@ public class NonOverlappingIntervals {
     }
 
     public int eraseOverlapIntervals(int[][] intervals) {
-        if (intervals.length == 0) return 0;
-        Arrays.sort(intervals, new LeftComparator());
-        int[] dp = new int[intervals.length];
-        dp[0] = 1;
-        for (int i = 1; i < intervals.length; i++) {
-            int max = 0;
-            for (int j = 0; j < i; j++) {
-                if (!isOverLapped(intervals[j], intervals[i])) {
-                    max = Math.max(dp[j], max);
-                }
+        if (intervals.length == 0) {
+            return 0;
+        }
+        //按左端点升序排列
+        Arrays.sort(intervals, (o1, o2) -> {
+            if (o1[0] == o2[0]) {
+                return o1[1] - o2[1];
             }
-            dp[i] = max + 1;
-        }
-        System.out.println(Arrays.toString(dp));
-        return intervals.length - dp[dp.length - 1];
-    }
-
-    private boolean isOverLapped(int[] prev, int[] cur) {
-        return cur[0] < prev[1];
-    }
-
-
-    class LeftComparator implements Comparator<int[]> {
-
-
-        @Override
-        public int compare(int[] o1, int[] o2) {
             return o1[0] - o2[0];
+        });
+        int count = 0;
+        //当前无重叠区间的右端点
+        int end = intervals[0][1];
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] < end) {
+                //当前考察的区间和当前无重叠区间有交集，去除一个区间，去除哪个呢，去除右端点大的（也就是更新右端点为较小值）
+                //因为区间越短越好
+                count++;
+                end = Math.min(end, intervals[i][1]);
+            } else {
+                //无交集，扩充当前无重叠区间的右端点
+                end = intervals[i][1];
+            }
         }
+        return count;
     }
 }
