@@ -12,6 +12,14 @@ public class KthLargestElementInAnArray {
         System.out.println(solution.findKthLargest(nums, 2));
     }
 
+    /**
+     * @param arr    数组
+     * @param l      左端点
+     * @param r      右端点
+     * @param k      要查找的下标
+     * @param random 随机
+     * @return arr[l, r]中第k小的元素，k从0开始计数
+     */
     private static int partition(int[] arr, int l, int r, int k, Random random) {
         int p = random.nextInt(r - l + 1) + l;
         //交换一下，再开始分区
