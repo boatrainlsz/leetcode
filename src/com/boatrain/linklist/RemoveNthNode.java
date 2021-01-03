@@ -28,21 +28,4 @@ public class RemoveNthNode {
         //不能返回head，而是dummyHead.next。考虑输入1,1这种情况
         return head;
     }
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }
