@@ -49,13 +49,4 @@ public class PalindromeLinkedList {
         }
         return true;
     }
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }
