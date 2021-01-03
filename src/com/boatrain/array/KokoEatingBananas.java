@@ -14,9 +14,9 @@ public class KokoEatingBananas {
         while (l <= r) {
             int mid = l + ((r - l) >> 1);
             int sum = 0;
-            for (int i = 0; i < n; i++) {
-                int temp = piles[i] / mid;
-                int mod = piles[i] % mid;
+            for (int pile : piles) {
+                int temp = pile / mid;
+                int mod = pile % mid;
                 if (mod != 0) {
                     temp++;
                 }
