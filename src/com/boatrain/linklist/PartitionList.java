@@ -12,6 +12,7 @@ public class PartitionList {
 
     public ListNode partition(ListNode head, int x) {
         if (head == null) return null;
+        //哑节点
         ListNode greaterDummyHead = new ListNode(Integer.MIN_VALUE);
         ListNode smallerDummyHead = new ListNode(Integer.MIN_VALUE);
         ListNode dummyHead = new ListNode(Integer.MIN_VALUE);
