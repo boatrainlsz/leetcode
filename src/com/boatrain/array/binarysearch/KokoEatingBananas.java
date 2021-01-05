@@ -1,4 +1,4 @@
-package com.boatrain.array;
+package com.boatrain.array.binarysearch;
 
 /**
  * https://leetcode-cn.com/problems/koko-eating-bananas/
