@@ -35,10 +35,7 @@ public class PositionsOfLargeGroups {
             }
             if (firstIndex[alphabetIndex] != -1 && lastIndex[alphabetIndex] != -1
                     && lastIndex[alphabetIndex] - firstIndex[alphabetIndex] >= 2) {
-                List<Integer> temp = new ArrayList<>();
-                temp.add(firstIndex[alphabetIndex]);
-                temp.add(lastIndex[alphabetIndex]);
-                ans.add(temp);
+                ans.add(Arrays.asList(firstIndex[alphabetIndex], lastIndex[alphabetIndex]));
             }
         }
         return ans;
