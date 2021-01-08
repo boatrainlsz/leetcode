@@ -17,8 +17,8 @@ public class RotateArray {
     public void rotate(int[] nums, int k) {
         int n = nums.length;
         if (nums.length == 0 || k == 0) return;
-        //每次向右移动一个，循环k次
-        for (int i = 0; i < k; i++) {
+        //解法1：每次向右移动一个，循环k次
+       /* for (int i = 0; i < k; i++) {
             //最后一个元素暂存
             int temp = nums[n - 1];
             //剩下的元素向后移动一位即可
@@ -27,6 +27,21 @@ public class RotateArray {
             }
             //第一个元素赋值为暂存的最后一个元素
             nums[0] = temp;
+        }*/
+
+        //解法2：直接一步到位，算出nums[i]向右移动K次落在哪里
+        int[] targetIndexArr = new int[n];
+        for (int i = 0; i < n; i++) {
+            //nums[i]的位置最后变成了targetIndexArr[i]，数组变成环，便于理解
+            targetIndexArr[i] = (i + k) % n;
+        }
+        int[] targetArr = new int[n];
+        for (int i = 0; i < n; i++) {
+            targetArr[targetIndexArr[i]] = nums[i];
+        }
+        //赋值回去
+        for (int i = 0; i < n; i++) {
+            nums[i] = targetArr[i];
         }
     }
 
