@@ -27,6 +27,7 @@ public class BestTimeToBuyAndSellStockIII {
             }
             former[i] = maxProfit;
         }
+        //初始值为former[n - 1]而不是Integer.MIN_VALUE;
         int ans = former[n - 1];
         int maxPrice = 0;
         maxProfit = 0;
@@ -36,7 +37,10 @@ public class BestTimeToBuyAndSellStockIII {
             } else if (maxPrice - prices[i] > maxProfit) {
                 maxProfit = maxPrice - prices[i];
             }
-            ans = Math.max(ans, former[i - 1] + maxProfit);
+            latter[i] = maxProfit;
+        }
+        for (int i = 1; i < n - 1; i++) {
+            ans = Math.max(ans, latter[i] + former[i - 1]);
         }
         return ans;
     }
