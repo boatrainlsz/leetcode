@@ -3,6 +3,9 @@ package com.boatrain.array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * https://leetcode-cn.com/problems/summary-ranges/
+ */
 public class SummaryRanges {
     public static void main(String[] args) {
         SummaryRanges solution = new SummaryRanges();
