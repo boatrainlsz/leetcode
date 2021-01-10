@@ -11,8 +11,8 @@ public class SummaryRanges {
     }
 
     public List<String> summaryRanges(int[] nums) {
-        if (nums.length == 0) return new ArrayList<>();
         List<String> ans = new ArrayList<>();
+        if (nums.length == 0) return ans;
         int n = nums.length;
         //i：增量为1的递增的起点，j：增量为1的递增的终点
         int i = 0, j = 0;
@@ -20,8 +20,8 @@ public class SummaryRanges {
             while (j + 1 < n && nums[j + 1] == nums[j] + 1) {
                 j++;
             }
-            String start = String.valueOf(nums[i]);
-            String end = String.valueOf(nums[j]);
+            String start = Integer.toString(nums[i]);
+            String end = Integer.toString(nums[j]);
             if (i == j) {
                 ans.add(start);
             } else {
