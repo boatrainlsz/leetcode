@@ -23,12 +23,12 @@ public class SummaryRanges {
             while (j + 1 < n && nums[j + 1] == nums[j] + 1) {
                 j++;
             }
-            String start = Integer.toString(nums[i]);
+            StringBuilder start = new StringBuilder(Integer.toString(nums[i]));
             String end = Integer.toString(nums[j]);
             if (i == j) {
-                ans.add(start);
+                ans.add(start.toString());
             } else {
-                ans.add(start + "->" + end);
+                ans.add(start.append("->").append(end).toString());
             }
             //开始下一轮探索
             i = ++j;
