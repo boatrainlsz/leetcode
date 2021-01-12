@@ -1,5 +1,7 @@
 package com.boatrain.tree.bst;
 
+import com.boatrain.tree.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +46,7 @@ public class MinimumAbsoluteDifferenceInBst {
 
     /**
      * 解法一：算出所有节点的答案，再取这些答案的最小值
+     *
      * @param root
      * @param list
      */
@@ -70,10 +73,10 @@ public class MinimumAbsoluteDifferenceInBst {
         list.add(result);
         //递归求出
         if (left != null) {
-            getMinimumDifference(left,list);
+            getMinimumDifference(left, list);
         }
         if (right != null) {
-            getMinimumDifference(right,list);
+            getMinimumDifference(right, list);
         }
     }
 
@@ -85,16 +88,6 @@ public class MinimumAbsoluteDifferenceInBst {
         list.add(root.val);
         if (root.right != null) {
             inorder(root.right, list);
-        }
-    }
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
         }
     }
 }

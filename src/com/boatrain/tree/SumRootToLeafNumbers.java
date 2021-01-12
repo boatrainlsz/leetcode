@@ -23,13 +23,4 @@ public class SumRootToLeafNumbers {
         return sumNumbers(root.left, temp) + sumNumbers(root.right, temp);
     }
 
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 }
