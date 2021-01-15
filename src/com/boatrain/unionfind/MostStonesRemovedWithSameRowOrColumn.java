@@ -31,16 +31,15 @@ public class MostStonesRemovedWithSameRowOrColumn {
          * i:        0,1,2,3,4,5,6,7,8,9
          * parent[i]:1,1,1,8,3,0,5,1,8,8
          */
-        private int[] parent;
-
+        private final int[] parent;
+        /**
+         * rank[i]：以i为根节点的树的层数
+         */
+        private final int[] rank;
         /**
          * 连通分量个数
          */
         private int connectedComponentSize;
-        /**
-         * rank[i]：以i为根节点的树的层数
-         */
-        private int[] rank;
 
         public UnionFind(int size) {
             parent = new int[size];
