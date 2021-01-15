@@ -96,17 +96,5 @@ public class MostStonesRemovedWithSameRowOrColumn {
             }
             return parent[p];
         }
-
-        public int remove(int p, boolean[] removed) {
-            int cnt = 0;
-            while (p != parent[p]) {
-                if (!removed[p]) {
-                    removed[p] = true;
-                    cnt++;
-                }
-                p = parent[p];
-            }
-            return cnt;
-        }
     }
 }
