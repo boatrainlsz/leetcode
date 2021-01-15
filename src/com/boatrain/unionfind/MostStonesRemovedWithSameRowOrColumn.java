@@ -20,7 +20,7 @@ public class MostStonesRemovedWithSameRowOrColumn {
                 }
             }
         }
-        return n - unionFind.getConnectedComponentSize();
+        return n - unionFind.getConnectedComponentCnt();
     }
 
 
@@ -39,20 +39,20 @@ public class MostStonesRemovedWithSameRowOrColumn {
         /**
          * 连通分量个数
          */
-        private int connectedComponentSize;
+        private int connectedComponentCnt;
 
         public UnionFind(int size) {
             parent = new int[size];
             rank = new int[size];
-            connectedComponentSize = size;
+            connectedComponentCnt = size;
             for (int i = 0; i < size; i++) {
                 parent[i] = i;
                 rank[i] = 1;
             }
         }
 
-        public int getConnectedComponentSize() {
-            return connectedComponentSize;
+        public int getConnectedComponentCnt() {
+            return connectedComponentCnt;
         }
 
         public boolean isConnected(int p, int q) {
@@ -69,7 +69,7 @@ public class MostStonesRemovedWithSameRowOrColumn {
             int pRoot = find(p);
             int qRoot = find(q);
             if (pRoot != qRoot) {
-                connectedComponentSize--;
+                connectedComponentCnt--;
                 //优化，要考虑pRoot和qRoot这两棵树谁的层数大，小的加到大的上，避免树瘸腿
                 if (rank[pRoot] < rank[qRoot]) {
                     //q树更深，注意这里qRoot的层数无需更新！
