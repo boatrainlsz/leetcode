@@ -1,4 +1,4 @@
-package com.boatrain.array;
+package com.boatrain.interview.microsoft;
 
 import java.util.ArrayList;
 import java.util.List;
