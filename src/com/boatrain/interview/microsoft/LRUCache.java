@@ -1,63 +1,93 @@
 package com.boatrain.interview.microsoft;
 
-import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Map;
 
 public class LRUCache {
-
-    private HashMap<Integer, Integer> map = new HashMap<>();
-    private Deque<Integer> deque = new LinkedList<>();
+    private Map<Integer, CacheNode> cache = new HashMap<Integer, CacheNode>();
+    private int size;
     private int capacity;
+    private CacheNode head, tail;
 
     public LRUCache(int capacity) {
+        this.size = 0;
         this.capacity = capacity;
+        // 使用伪头部和伪尾部节点
+        head = new CacheNode();
+        tail = new CacheNode();
+        head.next = tail;
+        tail.prev = head;
     }
 
-//    public static void main(String[] args) {
-//        LRUCache lRUCache = new LRUCache(10);
-//        lRUCache.put(10, 13); // 缓存是 {1=1}
-//        lRUCache.put(3, 17); // 缓存是 {1=1, 2=2}
-//        lRUCache.put(6, 11);
-//        lRUCache.put(10, 5);
-//        lRUCache.put(9, 10);
-//        lRUCache.get(13);    // 返回 1
-//        lRUCache.put(2, 19);
-//        lRUCache.get(2);
-//        lRUCache.get(3);
-//        lRUCache.put(5, 25);
-//        lRUCache.get(8);
-//        lRUCache.put(9, 22);
-//        lRUCache.put(5, 5);
-//        lRUCache.put(1, 30);
-//        lRUCache.get(11);
-//        lRUCache.put(9, 12);
-//        lRUCache.get(7);
-//        lRUCache.get(5);
-//        lRUCache.get(8);
-//        lRUCache.get(9);
-//        lRUCache.put(4, 30);
-//        lRUCache.put(9, 3);
-//        lRUCache.get(10);
-//        lRUCache.get(10);
-//    }
-
     public int get(int key) {
-        if (map.containsKey(key)) {
-            deque.remove(key);
-            deque.addFirst(key);
+        CacheNode node = cache.get(key);
+        if (node == null) {
+            return -1;
         }
-        return map.getOrDefault(key, -1);
+        // 如果 key 存在，先通过哈希表定位，再移到头部
+        moveToHead(node);
+        return node.value;
     }
 
     public void put(int key, int value) {
-        if (map.containsKey(key)) {
-            deque.remove(key);
-        }else if(deque.size() == capacity){
-            Integer last = deque.removeLast();
-            map.remove(last);
+        CacheNode node = cache.get(key);
+        if (node == null) {
+            // 如果 key 不存在，创建一个新的节点
+            CacheNode newNode = new CacheNode(key, value);
+            // 添加进哈希表
+            cache.put(key, newNode);
+            // 添加至双向链表的头部
+            addToHead(newNode);
+            ++size;
+            if (size > capacity) {
+                // 如果超出容量，删除双向链表的尾部节点
+                CacheNode tail = removeTail();
+                // 删除哈希表中对应的项
+                cache.remove(tail.key);
+                --size;
+            }
+        } else {
+            // 如果 key 存在，先通过哈希表定位，再修改 value，并移到头部
+            node.value = value;
+            moveToHead(node);
         }
-        deque.addFirst(key);
-        map.put(key, value);
+    }
+
+    private void addToHead(CacheNode node) {
+        node.prev = head;
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+    }
+
+    private void removeNode(CacheNode node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+
+    private void moveToHead(CacheNode node) {
+        removeNode(node);
+        addToHead(node);
+    }
+
+    private CacheNode removeTail() {
+        CacheNode res = tail.prev;
+        removeNode(res);
+        return res;
+    }
+
+    class CacheNode {
+        int key;
+        int value;
+        CacheNode prev;
+        CacheNode next;
+
+        public CacheNode() {
+        }
+
+        public CacheNode(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
     }
 }
