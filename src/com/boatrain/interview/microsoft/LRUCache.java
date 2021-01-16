@@ -7,6 +7,7 @@ public class LRUCache {
     private Map<Integer, CacheNode> cache = new HashMap<Integer, CacheNode>();
     private int size;
     private int capacity;
+    //head的next才是真正的head,tail的prev才是真正的tail
     private CacheNode head, tail;
 
     public LRUCache(int capacity) {
