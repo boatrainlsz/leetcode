@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 /**
  * https://leetcode-cn.com/problems/add-two-numbers/
+ * 有更好解法，看官方题解
  */
 public class AddTwoNumbers {
     public static void main(String[] args) {
