@@ -1,4 +1,4 @@
-package com.boatrain;
+package com.boatrain.tree.bst;
 
 import com.boatrain.tree.TreeNode;
 

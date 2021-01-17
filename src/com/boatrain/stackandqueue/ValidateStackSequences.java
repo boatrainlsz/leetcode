@@ -1,4 +1,4 @@
-package com.boatrain;
+package com.boatrain.stackandqueue;
 
 import java.util.Stack;
 

@@ -1,4 +1,4 @@
-package com.boatrain;
+package com.boatrain.numbers;
 
 import java.util.HashMap;
 import java.util.Map;

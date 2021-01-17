@@ -1,4 +1,4 @@
-package com.boatrain;
+package com.boatrain.tree;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
