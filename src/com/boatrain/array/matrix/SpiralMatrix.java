@@ -1,4 +1,4 @@
-package com.boatrain.array;
+package com.boatrain.array.matrix;
 
 import java.util.ArrayList;
 import java.util.List;
