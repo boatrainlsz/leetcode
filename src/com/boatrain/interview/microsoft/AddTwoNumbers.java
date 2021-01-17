@@ -47,12 +47,15 @@ public class AddTwoNumbers {
         cur = dummyHead;
         for (int i = size - 1; i >= 0; i--) {
             int sum = arr1[i] + arr2[i] + carry;
-            if (sum >= 10) {
+            /*if (sum >= 10) {
                 sum -= 10;
                 carry = 1;
             } else {
                 carry = 0;
-            }
+            }*/
+            //上面这段逻辑可以用下面这段逻辑代替，我好菜！ :)
+            carry = sum / 10;
+            sum = sum % 10;
             cur.next = new ListNode(sum);
             cur = cur.next;
         }
