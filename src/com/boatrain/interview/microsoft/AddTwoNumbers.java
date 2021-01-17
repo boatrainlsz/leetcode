@@ -66,4 +66,34 @@ public class AddTwoNumbers {
         }
         return dummyHead.next;
     }
+
+    /**
+     * 官方题解，2021/1/17 已理解
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbersBetter(ListNode l1, ListNode l2) {
+        int carry = 0;
+        ListNode dummyHead = new ListNode(-1);
+        ListNode cur = dummyHead;
+        ListNode cur1 = l1;
+        ListNode cur2 = l2;
+        while (cur1 != null || cur2 != null) {
+            int add1 = cur1 == null ? 0 : cur1.val;
+            int add2 = cur2 == null ? 0 : cur2.val;
+            int sum = add1 + add2 + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            cur.next = new ListNode(sum);
+            cur = cur.next;
+            cur1 = cur1 == null ? null : cur1.next;
+            cur2 = cur2 == null ? null : cur2.next;
+        }
+        if (carry == 1) {
+            cur.next = new ListNode(1);
+        }
+        return dummyHead.next;
+    }
 }
