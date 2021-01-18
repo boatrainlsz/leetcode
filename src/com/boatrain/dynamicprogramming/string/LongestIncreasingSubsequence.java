@@ -1,6 +1,4 @@
-package com.boatrain.dynamicprogramming;
-
-import java.util.Arrays;
+package com.boatrain.dynamicprogramming.string;
 
 /**
  * https://leetcode-cn.com/problems/longest-increasing-subsequence/

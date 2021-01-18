@@ -1,4 +1,4 @@
-package com.boatrain.dynamicprogramming;
+package com.boatrain.dynamicprogramming.string;
 
 public class IsSubsequence {
     public static void main(String[] args) {
