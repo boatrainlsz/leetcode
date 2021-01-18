@@ -1,7 +1,5 @@
 package com.boatrain.unionfind;
 
-import com.boatrain.dynamicprogramming.Solution;
-
 import java.util.*;
 
 /**
