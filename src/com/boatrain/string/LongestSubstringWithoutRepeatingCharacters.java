@@ -10,6 +10,12 @@ public class LongestSubstringWithoutRepeatingCharacters {
         System.out.println(solution.lengthOfLongestSubstring("dvdf"));
     }
 
+    /**
+     * 暴力解法
+     *
+     * @param s
+     * @return
+     */
     public int lengthOfLongestSubstring(String s) {
         if (s.length() == 0) return 0;
         int n = s.length();
@@ -26,6 +32,30 @@ public class LongestSubstringWithoutRepeatingCharacters {
                 }
                 ans = Math.max(ans, set.size());
             }
+        }
+        return ans;
+    }
+
+    /**
+     * 双指针解法
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstringDualPointer(String s) {
+        HashSet<Character> set = new HashSet<Character>();
+        int n = s.length();
+        char[] chars = s.toCharArray();
+        int right = -1, ans = 0;
+        for (int left = 0; left < n; left++) {
+            if (left != 0) {
+                set.remove(chars[left - 1]);
+            }
+            while (right + 1 < n && !set.contains(chars[right + 1])) {
+                set.add(chars[right + 1]);
+                right++;
+            }
+            ans = Math.max(ans, right - left + 1);
         }
         return ans;
     }
