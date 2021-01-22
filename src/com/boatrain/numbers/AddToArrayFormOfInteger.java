@@ -10,10 +10,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class AddToArrayFormOfInteger {
-    public static void main(String[] args) {
-        AddToArrayFormOfInteger solution = new AddToArrayFormOfInteger();
-        System.out.println(solution.addToArrayForm(new int[]{2, 1, 5}, 6));
-    }
+//    public static void main(String[] args) {
+//        AddToArrayFormOfInteger solution = new AddToArrayFormOfInteger();
+//        System.out.println(solution.addToArrayForm(new int[]{9,9,9,9}, 1));
+//    }
 
     public List<Integer> addToArrayForm(int[] A, int K) {
         List<Integer> list = new ArrayList<>();
@@ -22,25 +22,24 @@ public class AddToArrayFormOfInteger {
             list.add(K % 10);
             K = K / 10;
         }
-        Collections.reverse(list);
-        Integer[] B = list.toArray(new Integer[0]);
+//        Collections.reverse(list);
         int carry = 0;
         int index1 = A.length - 1;
-        int index2 = B.length - 1;
-        while (index1 >= 0 || index2 >= 0) {
+        int index2 = 0;
+        while (index1 >= 0 || index2 <= list.size() - 1) {
             int adder1 = 0;
             if (index1 >= 0) {
                 adder1 = A[index1];
             }
             int adder2 = 0;
-            if (index2 >= 0) {
-                adder2 = B[index2];
+            if (index2 <= list.size() - 1) {
+                adder2 = list.get(index2);
             }
             int sum = adder1 + adder2 + carry;
             carry = sum / 10;
             ans.add(sum % 10);
             index1--;
-            index2--;
+            index2++;
             System.out.println(index2);
         }
         if (carry != 0) ans.add(carry);
