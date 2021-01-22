@@ -10,6 +10,7 @@ import java.util.LinkedList;
 /**
  * https://leetcode-cn.com/problems/add-two-numbers/
  * 有更好解法，看官方题解
+ * 和这题一样的思路 {@link com.boatrain.numbers.AddToArrayFormOfInteger}
  */
 public class AddTwoNumbers {
     public static void main(String[] args) {
