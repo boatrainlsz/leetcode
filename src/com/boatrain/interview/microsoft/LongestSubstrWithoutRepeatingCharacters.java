@@ -9,7 +9,8 @@ import java.util.HashSet;
 public class LongestSubstrWithoutRepeatingCharacters {
     public static void main(String[] args) {
         LongestSubstrWithoutRepeatingCharacters solution = new LongestSubstrWithoutRepeatingCharacters();
-        String s = "abcabcbb";
+//        String s = "abcabcbb";
+        String s = "bbbbbbb";
         System.out.println(solution.lengthOfLongestSubstring(s));
     }
 
