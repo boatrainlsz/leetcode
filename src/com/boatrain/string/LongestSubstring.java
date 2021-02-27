@@ -23,8 +23,7 @@ public class LongestSubstring {
                 /*
                  * 如果一个字符 c在 s 中出现的次数少于 k 次，那么 s 中所有的包含 c 的子字符串都不能满足题意。
                  * 所以，应该在 s 的所有不包含 c 的子字符串中继续寻找结果
-                 */
-                String[] split = s.split(String.valueOf(c));
+                 */String[] split = s.split(String.valueOf(c));
                 for (String t : split) {
                     res = Math.max(res, longestSubstring(t, k));
                 }
