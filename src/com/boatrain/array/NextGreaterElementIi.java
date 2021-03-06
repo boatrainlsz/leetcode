@@ -17,9 +17,9 @@ public class NextGreaterElementIi {
     public int[] nextGreaterElements(int[] nums) {
         int n = nums.length;
         int[] ans = new int[n];
-        Arrays.fill(ans, -1);
         for (int i = 0; i < n; i++) {
             int index = (i + 1) % n;
+            ans[i] = -1;
             while (index != i) {
                 if (nums[index] > nums[i]) {
                     ans[i] = nums[index];
