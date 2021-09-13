@@ -1,5 +1,6 @@
 package com.boatrain.array;
 
+import java.util.PriorityQueue;
 import java.util.Random;
 
 /**
@@ -9,7 +10,13 @@ public class KthLargestElementInAnArray {
     public static void main(String[] args) {
         KthLargestElementInAnArray solution = new KthLargestElementInAnArray();
         int[] nums = new int[]{3, 2, 1, 5, 6, 4};
+        //有三种方法：
+        //快排非递归
         System.out.println(solution.findKthLargestNonR(nums, 2));
+        //快排递归
+        System.out.println(solution.findKthLargest(nums, 2));
+        //小顶堆
+        System.out.println(solution.findKthLargestByMinHeap(nums, 2));
     }
 
     /**
@@ -109,4 +116,25 @@ public class KthLargestElementInAnArray {
         return -1;
     }
 
+    /**
+     * 用小顶堆
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int findKthLargestByMinHeap(int[] nums, int k) {
+        PriorityQueue<Integer> queue = new PriorityQueue();
+        for (int num : nums) {
+            if (queue.size() < k) {
+                queue.add(num);
+            } else {
+                if (queue.peek() < num) {
+                    queue.poll();
+                    queue.add(num);
+                }
+            }
+        }
+        return queue.poll();
+    }
 }
