@@ -9,14 +9,15 @@ import java.util.Random;
 public class KthLargestElementInAnArray {
     public static void main(String[] args) {
         KthLargestElementInAnArray solution = new KthLargestElementInAnArray();
-        int[] nums = new int[]{3, 2, 1, 5, 6, 4};
+//        int[] nums = new int[]{3, 2, 1, 5, 6, 4};
+        int[] nums = new int[]{3,3,3,3,3,3,3,3,3};
         //有三种方法：
         //快排非递归
-        System.out.println(solution.findKthLargestNonR(nums, 2));
+//        System.out.println(solution.findKthLargestNonR(nums, 2));
         //快排递归
-        System.out.println(solution.findKthLargest(nums, 2));
-        //小顶堆
-        System.out.println(solution.findKthLargestByMinHeap(nums, 2));
+        System.out.println(solution.findKthLargest(nums, 1));
+//        小顶堆
+//        System.out.println(solution.findKthLargestByMinHeap(nums, 2));
     }
 
     /**
@@ -45,7 +46,7 @@ public class KthLargestElementInAnArray {
      * @param l
      * @param r
      * @param random
-     * @return
+     * @return arr[l, r]中pivot在有序数组中的位置
      */
     private static int partition(int[] arr, int l, int r, Random random) {
         int p = random.nextInt(r - l + 1) + l;
@@ -89,6 +90,7 @@ public class KthLargestElementInAnArray {
     public int findKthLargest(int[] nums, int k) {
         Random random = new Random();
         int n = nums.length;
+        //[1,2,3,4,5],n=5
         return selectK(nums, 0, nums.length - 1, n - k, random);
     }
 

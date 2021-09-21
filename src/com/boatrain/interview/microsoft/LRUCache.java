@@ -4,92 +4,84 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LRUCache {
-    private final Map<Integer, CacheNode> cache = new HashMap<Integer, CacheNode>();
-    private final int capacity;
-    //head的next才是真正的head,tail的prev才是真正的tail
-    private final CacheNode head;
-    private final CacheNode tail;
+    private HashMap<Integer, Node> map = new HashMap<>();
+    private int capacity;
     private int size;
+    private Node head;
+    private Node tail;
 
     public LRUCache(int capacity) {
-        this.size = 0;
         this.capacity = capacity;
-        // 使用伪头部和伪尾部节点
-        head = new CacheNode();
-        tail = new CacheNode();
+        head = new Node(Integer.MIN_VALUE, Integer.MAX_VALUE);
+        tail = new Node(Integer.MIN_VALUE, Integer.MAX_VALUE);
         head.next = tail;
         tail.prev = head;
     }
 
     public int get(int key) {
-        CacheNode node = cache.get(key);
-        if (node == null) {
-            return -1;
-        }
-        // 如果 key 存在，先通过哈希表定位，再移到头部
-        moveToHead(node);
+        Node node = map.get(key);
+        if (node == null) return -1;
+        move2Head(node);
         return node.value;
     }
 
-    public void put(int key, int value) {
-        CacheNode node = cache.get(key);
-        if (node == null) {
-            // 如果 key 不存在，创建一个新的节点
-            CacheNode newNode = new CacheNode(key, value);
-            // 添加进哈希表
-            cache.put(key, newNode);
-            // 添加至双向链表的头部
-            addToHead(newNode);
-            ++size;
-            if (size > capacity) {
-                // 如果超出容量，删除双向链表的尾部节点
-                CacheNode tail = removeTail();
-                // 删除哈希表中对应的项
-                cache.remove(tail.key);
-                --size;
-            }
-        } else {
-            // 如果 key 存在，先通过哈希表定位，再修改 value，并移到头部
-            node.value = value;
-            moveToHead(node);
-        }
+    private void move2Head(Node node) {
+        removeNode(node);
+        add2Head(node);
     }
 
-    private void addToHead(CacheNode node) {
-        node.prev = head;
-        node.next = head.next;
+    private void add2Head(Node node) {
         head.next.prev = node;
+        node.next = head.next;
+        node.prev = head;
         head.next = node;
     }
 
-    private void removeNode(CacheNode node) {
+    private void removeNode(Node node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
     }
 
-    private void moveToHead(CacheNode node) {
-        removeNode(node);
-        addToHead(node);
-    }
-
-    private CacheNode removeTail() {
-        CacheNode res = tail.prev;
-        removeNode(res);
-        return res;
-    }
-
-    static class CacheNode {
-        int key;
-        int value;
-        CacheNode prev;
-        CacheNode next;
-
-        public CacheNode() {
+    public void put(int key, int value) {
+        Node node = map.get(key);
+        if (node == null) {
+            node = new Node(key, value);
+            add2Head(node);
+            map.put(key, node);
+            size++;
+        } else {
+            node.value = value;
+            move2Head(node);
         }
+        if (size > capacity) {
+            removeTail();
+            size--;
+        }
+    }
 
-        public CacheNode(int key, int value) {
+    private void removeTail() {
+        map.remove(tail.prev.key);
+        tail.prev.prev.next = tail;
+        tail.prev = tail.prev.prev;
+
+    }
+
+    private static class Node {
+        private int key;
+        private int value;
+        private Node prev;
+        private Node next;
+
+        public Node(int key, int value) {
             this.key = key;
             this.value = value;
         }
     }
 }
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
