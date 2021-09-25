@@ -49,7 +49,31 @@ public class ReverseLinkedListII {
 //        ListNode node = solution.arrayToListNode(new int[]{4, -2, -4, 0, -2, -2, -1, -2});
         ListNode node = solution.arrayToListNode(new int[]{1, 2, 3, 4, 5});
         System.out.println(node);
-        System.out.println(solution.reverseBetween(node, 2, 4));
+        //我的写法，扫描两次
+//        System.out.println(solution.reverseBetween(node, 2, 4));
+        //更好的写法，扫描一次就行
+        System.out.println(solution.reverseBetween1(node, 2, 4));
+    }
+
+    public ListNode reverseBetween1(ListNode head, int left, int right) {
+        if (head == null || head.next == null) return head;
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode p = dummyHead;
+        for (int i = 0; i < left - 1; i++) {
+            p = p.next;
+        }
+        ListNode m = p.next, n = m.next;
+        for (int i = 0; i < right - left; i++) {
+            ListNode temp = n.next;
+            n.next = m;
+            m = n;
+            n = temp;
+        }
+        System.out.println(m.next.val);
+        p.next.next = n;
+        p.next = m;
+        return dummyHead.next;
     }
 
     private ListNode arrayToListNode(int[] array) {
