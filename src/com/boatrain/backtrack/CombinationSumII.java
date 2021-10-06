@@ -2,6 +2,7 @@ package com.boatrain.backtrack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class CombinationSumII {
@@ -18,22 +19,22 @@ public class CombinationSumII {
     }
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        HashSet<Integer> candidatesSet = new HashSet<>();
         for (int candidate : candidates) {
             countMap.merge(candidate, 1, Integer::sum);
+            candidatesSet.add(candidate);
         }
         List<Integer> path = new ArrayList<>();
-        find(candidates, target, 0, path);
+
+        find(candidatesSet.toArray(new Integer[0]), target, 0, path);
         return ans;
     }
 
-    private void find(int[] candidates, int target, int index, List<Integer> path) {
+    private void find(Integer[] candidates, int target, int index, List<Integer> path) {
         if (target < 0) {
             return;
         }
         if (target == 0) {
-//            for (Integer integer : path) {
-//                countMap.merge(integer, -1, Integer::sum);
-//            }
             ans.add(new ArrayList<>(path));
             return;
         }
