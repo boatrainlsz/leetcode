@@ -2,19 +2,18 @@ package com.boatrain.backtrack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 public class PermutationsII {
+    List<List<Integer>> ans = new ArrayList<>();
+    HashMap<Integer, Integer> countMap = new HashMap<>();
+
     public static void main(String[] args) {
         PermutationsII solution = new PermutationsII();
         int[] nums = {1, 1, 2};
         System.out.println(solution.permuteUnique(nums));
     }
-
-    List<List<Integer>> ans = new ArrayList<>();
-    HashMap<Integer, Integer> countMap = new HashMap<>();
 
     public List<List<Integer>> permuteUnique(int[] nums) {
         for (int num : nums) {
