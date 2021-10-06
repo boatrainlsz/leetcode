@@ -14,13 +14,11 @@ public class PermutationsII {
     }
 
     List<List<Integer>> ans = new ArrayList<>();
-    HashSet<Integer> set = new HashSet<>();
     HashMap<Integer, Integer> countMap = new HashMap<>();
 
     public List<List<Integer>> permuteUnique(int[] nums) {
         for (int num : nums) {
             countMap.merge(num, 1, Integer::sum);
-            set.add(num);
         }
         dfs(nums, 0, new ArrayList<Integer>());
         return ans;
