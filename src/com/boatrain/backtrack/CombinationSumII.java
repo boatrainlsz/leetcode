@@ -25,8 +25,13 @@ public class CombinationSumII {
             candidatesSet.add(candidate);
         }
         List<Integer> path = new ArrayList<>();
-
+        List<Integer> ori = new ArrayList<>();
+        for (int candidate : candidates) {
+            ori.add(candidate);
+        }
         find(candidatesSet.toArray(new Integer[0]), target, 0, path);
+        //不去重，会有重复组合
+//        find(ori.toArray(new Integer[0]), target, 0, path);
         return ans;
     }
 
