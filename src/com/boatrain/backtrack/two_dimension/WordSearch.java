@@ -43,7 +43,7 @@ public class WordSearch {
         visited = new boolean[maxX][maxY];
         for (int i = 0; i < maxX; i++) {
             for (int j = 0; j < maxY; j++) {
-                if (doCheck(board, i, j, word, 0)) return true;
+                if (doCheck(board, i, j, word.toCharArray(), 0)) return true;
             }
         }
         return false;
@@ -51,6 +51,7 @@ public class WordSearch {
 
     /**
      * 在矩阵board中，以board[x,y]为起点，看是否能找到words[index...end]
+     *
      * @param board
      * @param x
      * @param y
@@ -58,12 +59,12 @@ public class WordSearch {
      * @param index
      * @return
      */
-    private boolean doCheck(char[][] board, int x, int y, String words, int index) {
+    private boolean doCheck(char[][] board, int x, int y, char[] words, int index) {
         //递归终止条件
-        if (index == words.length() - 1) {
-            return board[x][y] == words.charAt(index);
+        if (index == words.length - 1) {
+            return board[x][y] == words[index];
         }
-        if (board[x][y] == words.charAt(index)) {
+        if (board[x][y] == words[index]) {
             visited[x][y] = true;
             for (int i = 0; i < 4; i++) {
                 int newX = x + direction[i][0];
@@ -82,6 +83,7 @@ public class WordSearch {
 
     /**
      * 下标是否越界
+     *
      * @param newX
      * @param newY
      * @return
