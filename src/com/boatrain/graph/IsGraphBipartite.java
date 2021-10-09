@@ -8,6 +8,7 @@ public class IsGraphBipartite {
         System.out.println(solution.isBipartite(graph));
     }
 
+    //0:未访问过，1：颜色1：-1：颜色2
     int[] visited;
 
     public boolean isBipartite(int[][] graph) {
