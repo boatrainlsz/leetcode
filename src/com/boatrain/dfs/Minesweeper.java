@@ -17,12 +17,10 @@ public class Minesweeper {
         int x = click[0];
         int y = click[1];
         if (board[x][y] == 'M') {
+            //规则1
             board[x][y] = 'X';
-            return board;
-        }
-        if (board[x][y] == 'E') {
+        } else if (board[x][y] == 'E') {
             dfs(board, x, y);
-            return board;
         }
         return board;
     }
@@ -31,8 +29,10 @@ public class Minesweeper {
         visited[x][y] = true;
         int mineCountByMySide = mineCountByMySide(board, x, y);
         if (mineCountByMySide != 0) {
+            //规则3
             board[x][y] = (char) (mineCountByMySide + 48);
         } else {
+            //规则2
             board[x][y] = 'B';
             for (int[] direction : directions) {
                 int newX = x + direction[0];
