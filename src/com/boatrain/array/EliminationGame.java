@@ -1,4 +1,4 @@
-package com.boatrain;
+package com.boatrain.array;
 
 import java.util.Stack;
 
@@ -9,10 +9,10 @@ import java.util.Stack;
 public class EliminationGame {
     public static void main(String[] args) {
         EliminationGame solution = new EliminationGame();
-        System.out.println(solution.lastRemaining(1));
+        System.out.println(solution.lastRemainingWithStack(1));
     }
 
-    public int lastRemaining(int n) {
+    public int lastRemainingWithStack(int n) {
         if (n == 1 || n == 2) return n;
         Stack<Integer> stack1 = new Stack<>();
         for (int i = n; i > 0; i--) {
@@ -40,5 +40,24 @@ public class EliminationGame {
             }
         }
         return stack1.isEmpty() ? stack2.pop() : stack1.pop();
+    }
+
+    public int lastRemaining(int n) {
+        int head = 1;
+        int step = 1;
+        boolean left = true;
+        //int n = n;
+
+        while (n > 1) {
+            //从左边开始移除 or（从右边开始移除，数列总数为奇数）
+            if (left || n % 2 != 0) {
+                head += step;
+            }
+            step *= 2; //步长 * 2
+            left = !left; //取反移除方向
+            n /= 2; //总数 / 2
+        }
+
+        return head;
     }
 }
