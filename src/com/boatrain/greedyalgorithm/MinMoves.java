@@ -5,7 +5,7 @@ package com.boatrain.greedyalgorithm;
  */
 public class MinMoves {
     public int minMoves(int target, int maxDoubles) {
-        if (target == 1) return 1;
+        if (target == 1) return 0;
         //加倍次数用完，只能递增
         if (maxDoubles == 0) return target - 1;
         //target / 2变到 target要消耗一次double，如果target为奇数，则还需要消耗一次递增
