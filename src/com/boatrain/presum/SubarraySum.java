@@ -1,5 +1,7 @@
 package com.boatrain.presum;
 
+import java.util.HashMap;
+
 public class SubarraySum {
     public static void main(String[] args) {
 //        int[] nums = {1, 2, 3};
@@ -24,5 +26,20 @@ public class SubarraySum {
             }
         }
         return ans;
+    }
+
+    class Solution {
+        public int subarraySum(int[] nums, int k) {
+            int preSum = 0;
+            int ret = 0;
+            HashMap<Integer, Integer> map = new HashMap<>();
+            map.put(0, 1);
+            for (int num : nums) {
+                preSum += num;
+                ret += map.getOrDefault(preSum - k, 0);
+                map.merge(preSum, 1, Integer::sum);
+            }
+            return ret;
+        }
     }
 }
