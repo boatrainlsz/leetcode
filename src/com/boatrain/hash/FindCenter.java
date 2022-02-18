@@ -6,19 +6,16 @@ package com.boatrain.hash;
 class FindCenter {
     public int findCenter(int[][] edges) {
         int n = edges.length + 1;
-        int[] count = new int[n + 1];
+        int[] degree = new int[n + 1];
         for (int[] edge : edges) {
-            count[edge[0]]++;
-            count[edge[1]]++;
+            degree[edge[0]]++;
+            degree[edge[1]]++;
         }
-        int max = Integer.MIN_VALUE;
-        int index = -1;
-        for (int i = 0; i < count.length; i++) {
-            if (max < count[i]) {
-                max = count[i];
-                index = i;
+        for (int i = 1; i < degree.length; i++) {
+            if (degree[i] == n - 1) {
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 }
