@@ -8,14 +8,20 @@ import java.util.List;
  * https://leetcode.cn/problems/find-all-duplicates-in-an-array/
  */
 public class FindAllDuplicatesInAnArray {
+    public static void main(String[] args) {
+        int[] nums = {4, 3, 2, 7, 8, 2, 3, 1};
+        System.out.println(new FindAllDuplicatesInAnArray().findDuplicates(nums));
+    }
+
     public List<Integer> findDuplicates(int[] nums) {
         List<Integer> ans = new ArrayList<>();
-        HashMap<Integer, Integer> count = new HashMap<>();
         for (int num : nums) {
-            count.merge(num, 1, Integer::sum);
-            if (count.get(num) == 2) {
-                ans.add(num);
+            if (nums[Math.abs(num) - 1] < 0) {
+                ans.add(Math.abs(num));
+            } else {
+                nums[Math.abs(num) - 1] *= -1;
             }
+
         }
         return ans;
     }
