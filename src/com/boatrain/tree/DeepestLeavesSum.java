@@ -1,7 +1,7 @@
 package com.boatrain.tree;
 
 /**
- * https://leetcode.cn/problems/deepest-leaves-sum/
+ * <a href="https://leetcode.cn/problems/deepest-leaves-sum/">...</a>
  */
 public class DeepestLeavesSum {
     int sum = 0;
