@@ -1,6 +1,10 @@
 package com.boatrain.string;
 
 class ReplaceTheSubstringForBalancedString {
+    public static void main(String[] args) {
+        ReplaceTheSubstringForBalancedString solution = new ReplaceTheSubstringForBalancedString();
+        System.out.println(solution.balancedString("QQQQQWERQWER"));
+    }
     public int balancedString(String s) {
         int[] cnt = new int[26];
         for (int i = 0; i < s.length(); i++) {
