@@ -1,4 +1,4 @@
-package com.boatrain.string;
+package com.boatrain.slidingwindow;
 
 class ReplaceTheSubstringForBalancedString {
     public static void main(String[] args) {
