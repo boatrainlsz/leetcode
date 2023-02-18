@@ -16,9 +16,13 @@ class CustomFunction {
 public class FindPositiveIntegerSolutionForAGivenEquation {
     public List<List<Integer>> findSolution(CustomFunction customfunction, int z) {
         List<List<Integer>> ans = new ArrayList<>();
-        for (int x = 1; x <= 1000; x++) {
+        xLoop:
+        for (int x = 1000; x >= 1; x--) {
             List<Integer> temp = new ArrayList<>();
-            for (int y = 1; y <= 1000; y++) {
+            for (int y = 1000; y >= 1; y--) {
+                if (customfunction.f(x, y) < z) {
+                    continue xLoop;
+                }
                 if (customfunction.f(x, y) == z) {
                     temp.add(x);
                     temp.add(y);
