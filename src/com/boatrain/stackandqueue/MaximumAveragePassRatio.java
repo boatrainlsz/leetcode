@@ -27,7 +27,7 @@ public class MaximumAveragePassRatio {
                 if (var1 == var2) {
                     return 0;
                 }
-                return var1 < var2 ? 1 : -1;
+                return var1 < var2 ? -1 : 1;
             }
         });
         for (int i = 0; i < classes.length; i++) {
