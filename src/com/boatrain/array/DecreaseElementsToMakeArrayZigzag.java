@@ -7,31 +7,22 @@ public class DecreaseElementsToMakeArrayZigzag {
     }
 
     public int movesToMakeZigzag(int[] nums) {
-        int ans1 = 0;
-        int ans2 = 0;
-        int[] nums1 = new int[nums.length];
-        System.arraycopy(nums, 0, nums1, 0, nums1.length);
-        for (int i = 0; i < nums1.length - 1; i++) {
-            if (i % 2 == 0 && nums1[i] <= nums1[i + 1]) {
-                ans1 += (nums1[i + 1] - nums1[i] + 1);
-                nums1[i + 1] = nums1[i] - 1;
+        return Math.min(doMove(nums, 0), doMove(nums, 1));
+    }
+
+    private int doMove(int[] nums, int start) {
+        int res = 0;
+        for (int i = start; i < nums.length; i += 2) {
+            //i在谷底
+            int temp = 0;
+            if (i - 1 >= 0) {
+                temp = Math.max(temp, nums[i] - nums[i - 1] + 1);
             }
-            if (i % 2 == 1 && nums1[i] >= nums1[i + 1]) {
-                ans1 += (nums1[i] - nums1[i + 1] + 1);
-                nums1[i] = nums1[i + 1] - 1;
+            if (i + 1 <= nums.length - 1) {
+                temp = Math.max(temp, nums[i] - nums[i + 1] + 1);
             }
+            res += temp;
         }
-        System.arraycopy(nums, 0, nums1, 0, nums1.length);
-        for (int i = 0; i < nums1.length - 1; i++) {
-            if (i % 2 == 0 && nums1[i] >= nums1[i + 1]) {
-                ans2 += (nums1[i] - nums1[i + 1] + 1);
-                nums1[i] = nums1[i + 1] - 1;
-            }
-            if (i % 2 == 1 && nums1[i] <= nums1[i + 1]) {
-                ans2 += (nums1[i + 1] - nums1[i] + 1);
-                nums1[i + 1] = nums1[i] - 1;
-            }
-        }
-        return Math.min(ans2, ans1);
+        return res;
     }
 }
