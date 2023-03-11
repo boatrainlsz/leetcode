@@ -1,13 +1,19 @@
 package com.boatrain.presum;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 public class FindLongestSubarrayLcci {
+    public static void main(String[] args) {
+        FindLongestSubarrayLcci solution = new FindLongestSubarrayLcci();
+        System.out.println(Arrays.toString(solution.findLongestSubarray(new String[]{"A", "A", "1"})));
+    }
+
     public String[] findLongestSubarray(String[] array) {
-        int[] numberPreSum = new int[array.length];
-        int[] letterPreSum = new int[array.length];
-        numberPreSum[0] = isDigit(array[0]) ? 1 : 0;
-        letterPreSum[0] = 1 - numberPreSum[0];
-        for (int i = 1; i < array.length; i++) {
-            boolean isDigit = isDigit(array[i]);
+        int[] numberPreSum = new int[array.length + 1];
+        int[] letterPreSum = new int[array.length + 1];
+        for (int i = 1; i < array.length + 1; i++) {
+            boolean isDigit = isDigit(array[i - 1]);
             numberPreSum[i] = numberPreSum[i - 1];
             letterPreSum[i] = letterPreSum[i - 1];
             if (isDigit) {
@@ -16,32 +22,23 @@ public class FindLongestSubarrayLcci {
                 letterPreSum[i]++;
             }
         }
-        if (letterPreSum[letterPreSum.length - 1] == letterPreSum.length) {
-            return new String[]{};
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = letterPreSum.length - 1; i >= 0; i--) {
+            map.put(letterPreSum[i] - numberPreSum[i], i);
         }
-        if (numberPreSum[numberPreSum.length - 1] == numberPreSum.length) {
-            return new String[]{};
-        }
-        int[] ans = new int[]{-1, -1};
-        for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                int numberCount = numberPreSum[j] - (i == 0 ? 0 : numberPreSum[i - 1]);
-                int letterCount = letterPreSum[j] - (i == 0 ? 0 : letterPreSum[i - 1]);
-                if (numberCount == letterCount) {
-                    if (j - i > ans[1] - ans[0]) {
-                        ans[1] = j;
-                        ans[0] = i;
-                    } else if (j - i == ans[1] - ans[0] && i < ans[0]) {
-                        ans[1] = j;
-                        ans[0] = i;
-                    }
-                }
+        int length = -1;
+        int left = Integer.MAX_VALUE;
+        for (int i = letterPreSum.length - 1; i >= 0; i--) {
+            Integer index = map.get(letterPreSum[i] - numberPreSum[i]);
+            if (i - index >= length) {
+                length = i - index;
+                left = index;
             }
         }
-        if (ans[0] == -1 && ans[1] == -1) return new String[]{};
-        String[] result = new String[ans[1] - ans[0] + 1];
-        System.arraycopy(array, ans[0], result, 0, result.length);
-        return result;
+        if (length == -1) return new String[]{};
+        String[] ans = new String[length];
+        System.arraycopy(array, left, ans, 0, length);
+        return ans;
     }
 
     private boolean isDigit(String s) {
