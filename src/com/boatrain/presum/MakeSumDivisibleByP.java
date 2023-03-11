@@ -1,31 +1,26 @@
 package com.boatrain.presum;
 
-/*
-https://leetcode.cn/problems/make-sum-divisible-by-p/
-* */
-public class MakeSumDivisibleByP {
-    public static void main(String[] args) {
-        MakeSumDivisibleByP solution = new MakeSumDivisibleByP();
-        System.out.println(solution.minSubarray(new int[]{1000000000,1000000000,1000000000}, 3));
-    }
+import java.util.HashMap;
+import java.util.Map;
 
+class MakeSumDivisibleByP {
     public int minSubarray(int[] nums, int p) {
-        long[] presum = new long[nums.length];
-        presum[0] = nums[0];
-        for (int i = 1; i < presum.length; i++) {
-            presum[i] = presum[i - 1] + nums[i];
+        int x = 0;
+        for (int num : nums) {
+            x = (x + num) % p;
         }
-        long total = presum[presum.length - 1];
-        if (total % p == 0) return 0;
-        int ans = Integer.MAX_VALUE;
-        for (int i = 0; i < presum.length; i++) {
-            for (int j = i; j < presum.length; j++) {
-                long remain = total - presum[j] + (i == 0 ? 0 : presum[i - 1]);
-                if (remain != 0 && remain % p == 0) {
-                    ans = Math.min(ans, j - i + 1);
-                }
+        if (x == 0) {
+            return 0;
+        }
+        Map<Integer, Integer> index = new HashMap<Integer, Integer>();
+        int y = 0, res = nums.length;
+        for (int i = 0; i < nums.length; i++) {
+            index.put(y, i); // f[i] mod p = y，因此哈希表记录 y 对应的下标为 i
+            y = (y + nums[i]) % p;
+            if (index.containsKey((y - x + p) % p)) {
+                res = Math.min(res, i - index.get((y - x + p) % p) + 1);
             }
         }
-        return ans == Integer.MAX_VALUE ? -1 : ans;
+        return res == nums.length ? -1 : res;
     }
 }
