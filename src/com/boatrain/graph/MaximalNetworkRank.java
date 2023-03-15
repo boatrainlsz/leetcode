@@ -25,8 +25,7 @@ public class MaximalNetworkRank {
         int ans = 0;
         for (int i = 0; i < n; i++) {
             Set<Integer> neighbors1 = adj.getOrDefault(i, new HashSet<>());
-            for (int j = 0; j < n; j++) {
-                if (i == j) continue;
+            for (int j = i + 1; j < n; j++) {
                 Set<Integer> neighbors2 = adj.getOrDefault(j, new HashSet<>());
                 int temp = neighbors2.size() + neighbors1.size();
                 if (neighbors2.contains(i) && neighbors1.contains(j)) {
